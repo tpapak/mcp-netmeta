@@ -142,191 +142,32 @@ Example conda paths:
 
 ---
 
-## Usage with ellmer (R)
+## Usage Guide
 
-[ellmer](https://github.com/tidyverse/ellmer) is an R package for calling LLM APIs. You can use it to interact with the netmeta MCP server.
+For detailed usage instructions, including:
 
-### Installation
+- **MCP client configurations** (Claude Desktop, Cursor, Cline, Continue, OpenCode)
+- **ellmer (R) integration** with examples
+- **Example prompts** and workflows
+- **Data format reference**
+- **Troubleshooting**
 
-```r
-# Install ellmer from CRAN
-install.packages("ellmer")
-
-# Or development version from GitHub
-# pak::pak("tidyverse/ellmer")
-```
-
-### Example: Network Meta-Analysis with ellmer
-
-```r
-library(ellmer)
-
-# Initialize chat with your preferred provider
-chat <- chat_openai(model = "gpt-4o")  
-# Or: chat <- chat_claude(), chat_gemini(), etc.
-
-# Define MCP tools for netmeta
-# (Configure your MCP client to connect to the netmeta server first)
-
-# Example conversation for network meta-analysis
-chat$chat("
-I have data from a network meta-analysis comparing smoking cessation treatments.
-Here's my CSV data:
-
-study,treat1,treat2,TE,seTE
-Study1,Placebo,NRT,0.5,0.2
-Study2,Placebo,Counseling,0.3,0.18
-Study3,NRT,Counseling,-0.2,0.22
-Study4,Placebo,NRT,0.6,0.25
-Study5,NRT,Combined,0.4,0.19
-
-Please run a network meta-analysis with Placebo as reference and show me:
-1. The treatment rankings
-2. The network structure
-")
-```
-
-### Interactive Console
-
-For interactive exploration, use ellmer's live console:
-
-```r
-library(ellmer)
-
-chat <- chat_openai(model = "gpt-4o")
-live_console(chat)
-# Now you can interactively ask questions about network meta-analysis
-```
-
-### Programmatic Usage
-
-```r
-library(ellmer)
-
-# Suppress streaming output for programmatic use
-chat <- chat_openai(model = "gpt-4o", echo = "none")
-
-# Run analysis
-result <- chat$chat("
-Convert this CSV to JSON and run network meta-analysis:
-study,treat1,treat2,TE,seTE
-Trial1,A,B,0.5,0.2
-Trial2,A,C,0.8,0.25
-Trial3,B,C,0.3,0.22
-")
-
-print(result)
-```
+See the **[Usage Guide](docs/USAGE.md)**.
 
 ---
 
-## Data Format
+## Quick Example
 
-### CSV Input (Recommended)
+```
+Run a network meta-analysis on this data:
 
-The easiest way to provide data is via CSV. Use `csv_to_json` to convert.
-
-**Pairwise format CSV:**
-```csv
 study,treat1,treat2,TE,seTE
 Study1,Placebo,DrugA,0.5,0.2
 Study2,Placebo,DrugB,0.8,0.25
 Study3,DrugA,DrugB,0.3,0.22
-```
 
-**Arm-level binary CSV:**
-```csv
-study,treatment,events,n
-Study1,Placebo,10,100
-Study1,DrugA,15,100
-Study2,Placebo,20,150
-Study2,DrugB,35,150
-```
-
-**Arm-level continuous CSV:**
-```csv
-study,treatment,mean,sd,n
-Study1,Placebo,5.2,1.5,50
-Study1,DrugA,4.1,1.4,48
-Study2,Placebo,5.5,1.6,60
-Study2,DrugB,3.8,1.3,58
-```
-
-### JSON Format
-
-For `runnetmeta`, provide data as a list of pairwise comparisons:
-
-```json
-[
-  {
-    "study": "Study identifier",
-    "treat1": "First treatment name",
-    "treat2": "Second treatment name",
-    "TE": 0.5,
-    "seTE": 0.2
-  }
-]
-```
-
-- `TE`: Treatment effect (log scale for ratios like OR, RR)
-- `seTE`: Standard error of the treatment effect
-
-### Arm-Level Data
-
-For `pairwise_to_netmeta`, provide arm-level data:
-
-**Binary outcomes:**
-```json
-[
-  {"study": "Study 1", "treatment": "A", "events": 10, "n": 100},
-  {"study": "Study 1", "treatment": "B", "events": 15, "n": 100}
-]
-```
-
-**Continuous outcomes:**
-```json
-[
-  {"study": "Study 1", "treatment": "A", "mean": 5.2, "sd": 1.5, "n": 50},
-  {"study": "Study 1", "treatment": "B", "mean": 4.8, "sd": 1.4, "n": 50}
-]
-```
-
-## Summary Measures
-
-| Code | Description | Outcome Type |
-|------|-------------|--------------|
-| `OR` | Odds Ratio | Binary |
-| `RR` | Risk Ratio | Binary |
-| `RD` | Risk Difference | Binary |
-| `MD` | Mean Difference | Continuous |
-| `SMD` | Standardized Mean Difference | Continuous |
-
-## Example Workflows
-
-### Workflow 1: From Pairwise CSV
-
-```
-1. csv_to_json(csv_content, data_format="pairwise")
-2. runnetmeta(data, sm="OR", reference="Placebo")
-3. get_ranking()
-```
-
-### Workflow 2: From Arm-Level Binary CSV
-
-```
-1. csv_to_json(csv_content, data_format="arm_binary")
-2. pairwise_to_netmeta(data, outcome_type="binary")
-3. runnetmeta(pairwise_data, sm="OR", reference="Placebo")
-4. get_ranking()
-```
-
-### Workflow 3: From Arm-Level Continuous CSV
-
-```
-1. csv_to_json(csv_content, data_format="arm_continuous")
-2. pairwise_to_netmeta(data, outcome_type="continuous")
-3. runnetmeta(pairwise_data, sm="MD", reference="Placebo")
-4. get_ranking()
+Use odds ratio as the summary measure and Placebo as reference.
+Show me the treatment rankings.
 ```
 
 ## License
