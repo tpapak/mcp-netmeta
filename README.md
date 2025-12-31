@@ -36,13 +36,25 @@ This server enables AI assistants to perform network meta-analysis, a statistica
 
 ## Deployment Options
 
-### Option 1: Public Hosted Servers
+### Option 1: Public Hosted Server
 
-A list of publicly available hosted servers will be documented here as they become available.
+A public hosted server will soon be available at:
 
-<!-- Public server URLs will be added here -->
+| Server | URL | Status |
+|--------|-----|--------|
+| CINeMA | `https://cinema.med.auth.gr/mcp-netmeta` | Coming soon |
 
-No installation required for hosted servers. Simply configure your MCP client to connect to the URL.
+No installation required for hosted servers. Simply configure your MCP client to connect to the URL:
+
+```json
+{
+  "mcpServers": {
+    "netmeta": {
+      "url": "https://cinema.med.auth.gr/mcp-netmeta"
+    }
+  }
+}
+```
 
 ---
 
