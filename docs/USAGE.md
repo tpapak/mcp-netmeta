@@ -10,7 +10,31 @@ Follow the installation instructions in the main README.md to set up the native 
 
 ### 2. Configure Your MCP Client
 
-#### For OpenCode
+The NetMeta MCP server works with any MCP-compatible client. Below are configuration examples for popular options.
+
+---
+
+## MCP Client Configurations
+
+### Claude Desktop
+
+Add to your Claude Desktop configuration file:
+
+- **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
+- **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "netmeta": {
+      "command": "/path/to/conda/envs/netmeta-mcp/bin/python",
+      "args": ["-m", "netmeta_mcp.server"]
+    }
+  }
+}
+```
+
+### OpenCode
 
 Add the netmeta server to your OpenCode configuration file (`~/.config/opencode/opencode.json`):
 
@@ -30,14 +54,9 @@ Add the netmeta server to your OpenCode configuration file (`~/.config/opencode/
 }
 ```
 
-**Example paths:**
-- macOS (Homebrew conda): `/opt/homebrew/Caskroom/miniconda/base/envs/netmeta-mcp/bin/python`
-- macOS (Miniforge): `~/miniforge3/envs/netmeta-mcp/bin/python`
-- Linux: `~/miniconda3/envs/netmeta-mcp/bin/python`
+### Cursor
 
-#### For Claude Desktop
-
-Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or equivalent:
+Add to Cursor's MCP settings (Settings → MCP Servers):
 
 ```json
 {
@@ -50,9 +69,219 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
 }
 ```
 
-### 3. Restart Your Client
+### Cline (VS Code Extension)
 
-After updating the configuration, restart your MCP client to load the new server.
+Add to your Cline MCP settings in VS Code:
+
+```json
+{
+  "mcpServers": {
+    "netmeta": {
+      "command": "/path/to/conda/envs/netmeta-mcp/bin/python",
+      "args": ["-m", "netmeta_mcp.server"]
+    }
+  }
+}
+```
+
+### Continue (VS Code/JetBrains Extension)
+
+Add to your Continue configuration (`~/.continue/config.json`):
+
+```json
+{
+  "mcpServers": [
+    {
+      "name": "netmeta",
+      "command": "/path/to/conda/envs/netmeta-mcp/bin/python",
+      "args": ["-m", "netmeta_mcp.server"]
+    }
+  ]
+}
+```
+
+### HTTP Transport (Any Client)
+
+For clients that support HTTP/SSE transport, run the HTTP server:
+
+```bash
+conda activate netmeta-mcp
+python -m netmeta_mcp.http_server
+```
+
+Then configure your client to connect to:
+
+```json
+{
+  "mcpServers": {
+    "netmeta": {
+      "url": "http://localhost:8000/mcp"
+    }
+  }
+}
+```
+
+---
+
+## Example Conda Paths
+
+Replace `/path/to/conda/envs/netmeta-mcp/bin/python` with your actual path:
+
+| Platform | Path |
+|----------|------|
+| macOS (Homebrew) | `/opt/homebrew/Caskroom/miniconda/base/envs/netmeta-mcp/bin/python` |
+| macOS (Miniforge) | `~/miniforge3/envs/netmeta-mcp/bin/python` |
+| Linux | `~/miniconda3/envs/netmeta-mcp/bin/python` |
+| Windows | `C:\Users\<user>\miniconda3\envs\netmeta-mcp\python.exe` |
+
+**Tip:** Find your conda path with: `conda run -n netmeta-mcp which python`
+
+---
+
+## Using with ellmer (R)
+
+[ellmer](https://github.com/tidyverse/ellmer) is an R package for calling LLM APIs. It supports MCP tools, making it ideal for R users who want to perform network meta-analysis through natural language.
+
+### Installation
+
+```r
+# Install ellmer from CRAN
+install.packages("ellmer")
+
+# Or development version
+# pak::pak("tidyverse/ellmer")
+```
+
+### Setup MCP Tools
+
+First, start the HTTP server:
+
+```bash
+conda activate netmeta-mcp
+python -m netmeta_mcp.http_server
+```
+
+Then in R, register the MCP tools:
+
+```r
+library(ellmer)
+
+# Register netmeta MCP tools
+netmeta_tools <- mcp_tools("http://localhost:8000/mcp")
+
+# Create a chat with the tools
+chat <- chat_openai(
+  model = "gpt-4o",
+  tools = netmeta_tools
+)
+```
+
+### Example: Complete Network Meta-Analysis
+
+```r
+library(ellmer)
+
+# Setup
+netmeta_tools <- mcp_tools("http://localhost:8000/mcp")
+chat <- chat_openai(model = "gpt-4o", tools = netmeta_tools)
+
+# Run analysis through natural language
+chat$chat("
+I have data from trials comparing smoking cessation treatments.
+Here's my CSV data:
+
+study,treat1,treat2,TE,seTE
+Study1,No contact,Self-help,0.49,0.40
+Study2,No contact,Individual counselling,0.84,0.28
+Study3,Self-help,Individual counselling,0.35,0.31
+Study4,No contact,Group counselling,1.14,0.21
+Study5,Individual counselling,Group counselling,0.30,0.28
+
+Please:
+1. Run a network meta-analysis with 'No contact' as reference
+2. Show me the treatment rankings
+3. Display the network structure
+")
+```
+
+### Interactive Console
+
+For exploratory analysis, use ellmer's live console:
+
+```r
+library(ellmer)
+
+netmeta_tools <- mcp_tools("http://localhost:8000/mcp")
+chat <- chat_openai(model = "gpt-4o", tools = netmeta_tools)
+
+# Start interactive session
+live_console(chat)
+
+# Now chat naturally:
+# > "What tools do you have available for network meta-analysis?"
+# > "Convert this CSV and run an analysis: ..."
+# > "Show me the league table"
+```
+
+### Programmatic Usage
+
+For scripts and automated workflows:
+
+```r
+library(ellmer)
+
+# Suppress streaming for programmatic use
+netmeta_tools <- mcp_tools("http://localhost:8000/mcp")
+chat <- chat_openai(model = "gpt-4o", tools = netmeta_tools, echo = "none")
+
+# Prepare your data
+csv_data <- "study,treat1,treat2,TE,seTE
+Trial1,A,B,0.5,0.2
+Trial2,A,C,0.8,0.25
+Trial3,B,C,0.3,0.22"
+
+# Run analysis
+result <- chat$chat(paste0("
+Run network meta-analysis on this data with treatment A as reference:
+
+", csv_data, "
+
+Return the treatment rankings as a formatted table.
+"))
+
+print(result)
+```
+
+### Using Different LLM Providers with ellmer
+
+ellmer supports multiple providers:
+
+```r
+# OpenAI
+chat <- chat_openai(model = "gpt-4o", tools = netmeta_tools)
+
+# Anthropic Claude
+chat <- chat_anthropic(model = "claude-sonnet-4-20250514", tools = netmeta_tools)
+
+# Google Gemini
+chat <- chat_gemini(model = "gemini-1.5-pro", tools = netmeta_tools)
+
+# Local Ollama
+chat <- chat_ollama(model = "llama3.1", tools = netmeta_tools)
+
+# Azure OpenAI
+chat <- chat_azure(
+  endpoint = "https://your-resource.openai.azure.com",
+  deployment_id = "gpt-4o",
+  tools = netmeta_tools
+)
+```
+
+---
+
+## Restart Your Client
+
+After updating any configuration, restart your MCP client to load the new server.
 
 ## Available Tools
 
@@ -205,6 +434,17 @@ After running the network meta-analysis, show me:
 - For arm-level binary: `study, treatment, events, n`
 - For arm-level continuous: `study, treatment, mean, sd, n`
 
+### ellmer: "Connection refused"
+
+- Ensure the HTTP server is running: `python -m netmeta_mcp.http_server`
+- Check the URL matches: `http://localhost:8000/mcp`
+- Verify no firewall is blocking port 8000
+
+### ellmer: "Tool not found"
+
+- Verify MCP tools are registered: `print(netmeta_tools)`
+- Ensure you passed `tools = netmeta_tools` when creating the chat
+
 ## Data Format Reference
 
 ### Pairwise Format
@@ -231,3 +471,9 @@ study,treatment,mean,sd,n
 - `mean`: Mean outcome
 - `sd`: Standard deviation
 - `n`: Sample size
+
+## More Resources
+
+- [netmeta R package documentation](https://cran.r-project.org/web/packages/netmeta/netmeta.pdf)
+- [ellmer documentation](https://ellmer.tidyverse.org/)
+- [MCP Protocol specification](https://modelcontextprotocol.io/)
