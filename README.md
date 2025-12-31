@@ -59,9 +59,8 @@ For local development or when you want to run your own server.
 
 ```bash
 # Clone the repository
-git clone https://github.com/tpapak/netmeta.git
-cd netmeta
-git checkout mcp
+git clone https://github.com/tpapak/mcp-netmeta.git
+cd mcp-netmeta
 
 # Create conda environment
 conda env create -f environment.yml
@@ -106,7 +105,7 @@ Server runs at `http://localhost:8000/mcp`
     "netmeta": {
       "command": "/path/to/conda/envs/netmeta-mcp/bin/python",
       "args": ["-m", "netmeta_mcp.server"],
-      "cwd": "/path/to/netmeta"
+      "cwd": "/path/to/mcp-netmeta"
     }
   }
 }
@@ -320,7 +319,7 @@ For `pairwise_to_netmeta`, provide arm-level data:
 
 ## License
 
-MIT License
+GPL-3.0 License
 
 ## References
 
