@@ -1,0 +1,763 @@
+{
+  "name": "Linde2015",
+  "description": "Network meta-analysis of treatments for depression",
+  "source": "Linde et al. (2015)",
+  "outcome": "Response to treatment (binary)",
+  "sm": "OR",
+  "reference": "Placebo",
+  "format": "arm-level",
+  "n_studies": 66,
+  "note": "Use pairwise_to_netmeta tool with outcome_type=binary to convert to pairwise format",
+  "data": [
+    {
+      "study": "Lecrubier 1997",
+      "treatment": "TCA",
+      "events": 49,
+      "n": 75
+    },
+    {
+      "study": "Lecrubier 1997",
+      "treatment": "SNRI",
+      "events": 60,
+      "n": 78
+    },
+    {
+      "study": "Lecrubier 1997",
+      "treatment": "Placebo",
+      "events": 48,
+      "n": 76
+    },
+    {
+      "study": "Blashki 1971",
+      "treatment": "TCA",
+      "events": 20,
+      "n": 35
+    },
+    {
+      "study": "Blashki 1971",
+      "treatment": "Placebo",
+      "events": 8,
+      "n": 23
+    },
+    {
+      "study": "Barge-Schaapveld 2002",
+      "treatment": "TCA",
+      "events": 16,
+      "n": 32
+    },
+    {
+      "study": "Barge-Schaapveld 2002",
+      "treatment": "Placebo",
+      "events": 12,
+      "n": 31
+    },
+    {
+      "study": "Simon 1996",
+      "treatment": "TCA",
+      "events": 59,
+      "n": 363
+    },
+    {
+      "study": "Simon 1996",
+      "treatment": "SSRI",
+      "events": 37,
+      "n": 173
+    },
+    {
+      "study": "Doogan 1994",
+      "treatment": "TCA",
+      "events": 48,
+      "n": 108
+    },
+    {
+      "study": "Doogan 1994",
+      "treatment": "SSRI",
+      "events": 50,
+      "n": 99
+    },
+    {
+      "study": "Doogan 1994",
+      "treatment": "Placebo",
+      "events": 40,
+      "n": 101
+    },
+    {
+      "study": "Boyer Teil 1 1996",
+      "treatment": "TCA",
+      "events": 55,
+      "n": 111
+    },
+    {
+      "study": "Boyer Teil 1 1996",
+      "treatment": "Placebo",
+      "events": 27,
+      "n": 108
+    },
+    {
+      "study": "Moon 1994",
+      "treatment": "TCA",
+      "events": 29,
+      "n": 55
+    },
+    {
+      "study": "Moon 1994",
+      "treatment": "SSRI",
+      "events": 27,
+      "n": 51
+    },
+    {
+      "study": "Christiansen 1996",
+      "treatment": "TCA",
+      "events": 48,
+      "n": 73
+    },
+    {
+      "study": "Christiansen 1996",
+      "treatment": "SSRI",
+      "events": 46,
+      "n": 71
+    },
+    {
+      "study": "Freed 1999",
+      "treatment": "TCA",
+      "events": 122,
+      "n": 191
+    },
+    {
+      "study": "Freed 1999",
+      "treatment": "SSRI",
+      "events": 127,
+      "n": 184
+    },
+    {
+      "study": "Mynor-Wallis 1995",
+      "treatment": "TCA",
+      "events": 16,
+      "n": 31
+    },
+    {
+      "study": "Mynor-Wallis 1995",
+      "treatment": "Placebo",
+      "events": 9,
+      "n": 30
+    },
+    {
+      "study": "Lepola 2003",
+      "treatment": "SSRI",
+      "events": 183,
+      "n": 314
+    },
+    {
+      "study": "Lepola 2003",
+      "treatment": "Placebo",
+      "events": 74,
+      "n": 154
+    },
+    {
+      "study": "Corne 1989",
+      "treatment": "TCA",
+      "events": 31,
+      "n": 51
+    },
+    {
+      "study": "Corne 1989",
+      "treatment": "SSRI",
+      "events": 19,
+      "n": 49
+    },
+    {
+      "study": "Wheatley 1989",
+      "treatment": "NaSSa",
+      "events": 17,
+      "n": 38
+    },
+    {
+      "study": "Wheatley 1989",
+      "treatment": "rMAO-A",
+      "events": 34,
+      "n": 79
+    },
+    {
+      "study": "Hollyman 1988",
+      "treatment": "TCA",
+      "events": 37,
+      "n": 90
+    },
+    {
+      "study": "Hollyman 1988",
+      "treatment": "Placebo",
+      "events": 23,
+      "n": 88
+    },
+    {
+      "study": "Beaumont 1984",
+      "treatment": "TCA",
+      "events": 120,
+      "n": 175
+    },
+    {
+      "study": "Beaumont 1984",
+      "treatment": "rMAO-A",
+      "events": 95,
+      "n": 170
+    },
+    {
+      "study": "Moon 1996",
+      "treatment": "TCA",
+      "events": 33,
+      "n": 68
+    },
+    {
+      "study": "Moon 1996",
+      "treatment": "SSRI",
+      "events": 38,
+      "n": 70
+    },
+    {
+      "study": "Hutchinson 1992",
+      "treatment": "TCA",
+      "events": 18,
+      "n": 32
+    },
+    {
+      "study": "Hutchinson 1992",
+      "treatment": "SSRI",
+      "events": 35,
+      "n": 58
+    },
+    {
+      "study": "Brink 1984",
+      "treatment": "NaSSa",
+      "events": 15,
+      "n": 27
+    },
+    {
+      "study": "Brink 1984",
+      "treatment": "Placebo",
+      "events": 12,
+      "n": 25
+    },
+    {
+      "study": "Tylee 1997",
+      "treatment": "SSRI",
+      "events": 98,
+      "n": 170
+    },
+    {
+      "study": "Tylee 1997",
+      "treatment": "SNRI",
+      "events": 81,
+      "n": 171
+    },
+    {
+      "study": "Gastpar 2005",
+      "treatment": "SSRI",
+      "events": 72,
+      "n": 118
+    },
+    {
+      "study": "Gastpar 2005",
+      "treatment": "Hypericum",
+      "events": 70,
+      "n": 123
+    },
+    {
+      "study": "Wade 2002",
+      "treatment": "SSRI",
+      "events": 103,
+      "n": 191
+    },
+    {
+      "study": "Wade 2002",
+      "treatment": "Placebo",
+      "events": 79,
+      "n": 189
+    },
+    {
+      "study": "Williams 2000",
+      "treatment": "SSRI",
+      "events": 60,
+      "n": 137
+    },
+    {
+      "study": "Williams 2000",
+      "treatment": "Placebo",
+      "events": 43,
+      "n": 140
+    },
+    {
+      "study": "Gastpar 2006",
+      "treatment": "SSRI",
+      "events": 71,
+      "n": 127
+    },
+    {
+      "study": "Gastpar 2006",
+      "treatment": "Hypericum",
+      "events": 71,
+      "n": 131
+    },
+    {
+      "study": "Gastpar 2006",
+      "treatment": "Placebo",
+      "events": 51,
+      "n": 130
+    },
+    {
+      "study": "Lingjarde 1995",
+      "treatment": "TCA",
+      "events": 14,
+      "n": 23
+    },
+    {
+      "study": "Lingjarde 1995",
+      "treatment": "rMAO-A",
+      "events": 13,
+      "n": 30
+    },
+    {
+      "study": "Malt 1999",
+      "treatment": "SSRI",
+      "events": 66,
+      "n": 122
+    },
+    {
+      "study": "Malt 1999",
+      "treatment": "NaSSa",
+      "events": 60,
+      "n": 121
+    },
+    {
+      "study": "Malt 1999",
+      "treatment": "Placebo",
+      "events": 59,
+      "n": 129
+    },
+    {
+      "study": "Philipp 1999",
+      "treatment": "TCA",
+      "events": 70,
+      "n": 110
+    },
+    {
+      "study": "Philipp 1999",
+      "treatment": "Hypericum",
+      "events": 76,
+      "n": 106
+    },
+    {
+      "study": "Philipp 1999",
+      "treatment": "Placebo",
+      "events": 29,
+      "n": 47
+    },
+    {
+      "study": "Rosenberg 1994",
+      "treatment": "TCA",
+      "events": 49,
+      "n": 92
+    },
+    {
+      "study": "Rosenberg 1994",
+      "treatment": "SSRI",
+      "events": 202,
+      "n": 380
+    },
+    {
+      "study": "Ravindran 1997",
+      "treatment": "TCA",
+      "events": 317,
+      "n": 506
+    },
+    {
+      "study": "Ravindran 1997",
+      "treatment": "SSRI",
+      "events": 328,
+      "n": 513
+    },
+    {
+      "study": "Bjerkenstedt 2005",
+      "treatment": "SSRI",
+      "events": 20,
+      "n": 56
+    },
+    {
+      "study": "Bjerkenstedt 2005",
+      "treatment": "Hypericum",
+      "events": 22,
+      "n": 57
+    },
+    {
+      "study": "Bjerkenstedt 2005",
+      "treatment": "Placebo",
+      "events": 21,
+      "n": 57
+    },
+    {
+      "study": "Schrader 2000",
+      "treatment": "SSRI",
+      "events": 45,
+      "n": 114
+    },
+    {
+      "study": "Schrader 2000",
+      "treatment": "Hypericum",
+      "events": 75,
+      "n": 126
+    },
+    {
+      "study": "Harrer 1991",
+      "treatment": "Hypericum",
+      "events": 35,
+      "n": 60
+    },
+    {
+      "study": "Harrer 1991",
+      "treatment": "Placebo",
+      "events": 10,
+      "n": 60
+    },
+    {
+      "study": "Huebner 1993",
+      "treatment": "Hypericum",
+      "events": 14,
+      "n": 20
+    },
+    {
+      "study": "Huebner 1993",
+      "treatment": "Placebo",
+      "events": 9,
+      "n": 20
+    },
+    {
+      "study": "Harrer 1999",
+      "treatment": "SSRI",
+      "events": 57,
+      "n": 84
+    },
+    {
+      "study": "Harrer 1999",
+      "treatment": "Hypericum",
+      "events": 50,
+      "n": 77
+    },
+    {
+      "study": "Schmidt 1989",
+      "treatment": "Hypericum",
+      "events": 10,
+      "n": 20
+    },
+    {
+      "study": "Schmidt 1989",
+      "treatment": "Placebo",
+      "events": 4,
+      "n": 20
+    },
+    {
+      "study": "van Gurp 2002",
+      "treatment": "SSRI",
+      "events": 23,
+      "n": 45
+    },
+    {
+      "study": "van Gurp 2002",
+      "treatment": "Hypericum",
+      "events": 25,
+      "n": 45
+    },
+    {
+      "study": "Witte 1995",
+      "treatment": "Hypericum",
+      "events": 34,
+      "n": 48
+    },
+    {
+      "study": "Witte 1995",
+      "treatment": "Placebo",
+      "events": 25,
+      "n": 49
+    },
+    {
+      "study": "Wheatley 1997",
+      "treatment": "TCA",
+      "events": 40,
+      "n": 78
+    },
+    {
+      "study": "Wheatley 1997",
+      "treatment": "Hypericum",
+      "events": 42,
+      "n": 87
+    },
+    {
+      "study": "König 1993",
+      "treatment": "Hypericum",
+      "events": 32,
+      "n": 55
+    },
+    {
+      "study": "König 1993",
+      "treatment": "Placebo",
+      "events": 29,
+      "n": 57
+    },
+    {
+      "study": "Laakmann 1998",
+      "treatment": "Hypericum",
+      "events": 43,
+      "n": 98
+    },
+    {
+      "study": "Laakmann 1998",
+      "treatment": "Placebo",
+      "events": 16,
+      "n": 49
+    },
+    {
+      "study": "Montgomery 2004",
+      "treatment": "SSRI",
+      "events": 113,
+      "n": 148
+    },
+    {
+      "study": "Montgomery 2004",
+      "treatment": "SNRI",
+      "events": 113,
+      "n": 145
+    },
+    {
+      "study": "Blacker 1988",
+      "treatment": "TCA",
+      "events": 56,
+      "n": 79
+    },
+    {
+      "study": "Blacker 1988",
+      "treatment": "Low-dose SARI",
+      "events": 58,
+      "n": 112
+    },
+    {
+      "study": "Blacker 1988",
+      "treatment": "NaSSa",
+      "events": 14,
+      "n": 36
+    },
+    {
+      "study": "Beaumont 1984",
+      "treatment": "Low-dose SARI",
+      "events": 38,
+      "n": 61
+    },
+    {
+      "study": "Beaumont 1984",
+      "treatment": "NaSSa",
+      "events": 25,
+      "n": 64
+    },
+    {
+      "study": "Fairwheather 1999",
+      "treatment": "TCA",
+      "events": 21,
+      "n": 42
+    },
+    {
+      "study": "Fairwheather 1999",
+      "treatment": "SSRI",
+      "events": 15,
+      "n": 42
+    },
+    {
+      "study": "Gachoud 1994",
+      "treatment": "TCA",
+      "events": 35,
+      "n": 64
+    },
+    {
+      "study": "Gachoud 1994",
+      "treatment": "rMAO-A",
+      "events": 31,
+      "n": 66
+    },
+    {
+      "study": "GSK-PAR2906 1985",
+      "treatment": "TCA",
+      "events": 36,
+      "n": 80
+    },
+    {
+      "study": "GSK-PAR2906 1985",
+      "treatment": "SSRI",
+      "events": 29,
+      "n": 82
+    },
+    {
+      "study": "GSK-2906 1991",
+      "treatment": "TCA",
+      "events": 35,
+      "n": 67
+    },
+    {
+      "study": "GSK-2906 1991",
+      "treatment": "SSRI",
+      "events": 29,
+      "n": 67
+    },
+    {
+      "study": "GSK-PARMDUK 1986",
+      "treatment": "TCA",
+      "events": 11,
+      "n": 30
+    },
+    {
+      "study": "GSK-PARMDUK 1986",
+      "treatment": "SSRI",
+      "events": 15,
+      "n": 29
+    },
+    {
+      "study": "Guelfi 1999",
+      "treatment": "TCA",
+      "events": 57,
+      "n": 115
+    },
+    {
+      "study": "Guelfi 1999",
+      "treatment": "SSRI",
+      "events": 72,
+      "n": 122
+    },
+    {
+      "study": "Kyle 1998",
+      "treatment": "TCA",
+      "events": 124,
+      "n": 186
+    },
+    {
+      "study": "Kyle 1998",
+      "treatment": "SSRI",
+      "events": 122,
+      "n": 179
+    },
+    {
+      "study": "McPartlin 1998",
+      "treatment": "SSRI",
+      "events": 113,
+      "n": 178
+    },
+    {
+      "study": "McPartlin 1998",
+      "treatment": "SNRI",
+      "events": 130,
+      "n": 183
+    },
+    {
+      "study": "Moon 1990",
+      "treatment": "TCA",
+      "events": 52,
+      "n": 114
+    },
+    {
+      "study": "Moon 1990",
+      "treatment": "Low-dose SARI",
+      "events": 54,
+      "n": 114
+    },
+    {
+      "study": "Moon 1988",
+      "treatment": "Low-dose SARI",
+      "events": 15,
+      "n": 20
+    },
+    {
+      "study": "Moon 1988",
+      "treatment": "NaSSa",
+      "events": 15,
+      "n": 20
+    },
+    {
+      "study": "Moon 1991",
+      "treatment": "SSRI",
+      "events": 28,
+      "n": 31
+    },
+    {
+      "study": "Moon 1991",
+      "treatment": "NaSSa",
+      "events": 25,
+      "n": 31
+    },
+    {
+      "study": "Peveler 2005",
+      "treatment": "TCA",
+      "events": 63,
+      "n": 218
+    },
+    {
+      "study": "Peveler 2005",
+      "treatment": "SSRI",
+      "events": 31,
+      "n": 109
+    },
+    {
+      "study": "Richards 1982",
+      "treatment": "Low-dose SARI",
+      "events": 27,
+      "n": 43
+    },
+    {
+      "study": "Richards 1982",
+      "treatment": "NaSSa",
+      "events": 15,
+      "n": 40
+    },
+    {
+      "study": "Wade 2003",
+      "treatment": "SSRI",
+      "events": 35,
+      "n": 98
+    },
+    {
+      "study": "Wade 2003",
+      "treatment": "NaSSa",
+      "events": 43,
+      "n": 99
+    },
+    {
+      "study": "Serrano-Blanco 2006",
+      "treatment": "TCA",
+      "events": 22,
+      "n": 50
+    },
+    {
+      "study": "Serrano-Blanco 2006",
+      "treatment": "SSRI",
+      "events": 21,
+      "n": 53
+    },
+    {
+      "study": "Trick 2004",
+      "treatment": "TCA",
+      "events": 21,
+      "n": 43
+    },
+    {
+      "study": "Trick 2004",
+      "treatment": "SNRI",
+      "events": 19,
+      "n": 45
+    },
+    {
+      "study": "Wiles 2012",
+      "treatment": "SSRI",
+      "events": 117,
+      "n": 298
+    },
+    {
+      "study": "Wiles 2012",
+      "treatment": "NRI",
+      "events": 107,
+      "n": 303
+    }
+  ]
+}

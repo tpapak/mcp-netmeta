@@ -1,0 +1,25 @@
+# Conda environment for netmeta MCP server
+# 
+# After creating the environment, install netmeta from GitHub:
+#   R -e "remotes::install_github('guido-s/netmeta@5ecfc1d7739c3df360a694d60af0563bc43d68ea')"
+# 
+# See NETMETA_VERSION file for version details
+#
+name: netmeta-mcp
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  # Python
+  - python=3.11
+  # R base and dependencies (netmeta installed separately from GitHub)
+  - r-base=4.3
+  - r-meta
+  - r-jsonlite
+  - r-remotes
+  # Python packages via pip
+  - pip
+  - pip:
+    - mcp
+    - uvicorn
+    - starlette

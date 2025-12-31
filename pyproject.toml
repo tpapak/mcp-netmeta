@@ -1,0 +1,54 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "netmeta-mcp"
+version = "0.1.0"
+description = "MCP server for network meta-analysis using the R netmeta package"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [
+    { name = "Your Name", email = "your.email@example.com" }
+]
+keywords = ["mcp", "network-meta-analysis", "netmeta", "evidence-synthesis"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+]
+
+dependencies = [
+    "mcp>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+]
+http = [
+    "uvicorn>=0.24.0",
+    "starlette>=0.32.0",
+]
+
+[project.scripts]
+netmeta-mcp = "netmeta_mcp.server:main"
+
+[project.urls]
+Homepage = "https://github.com/tpapak/netmeta"
+Documentation = "https://cinema.med.auth.gr/mcp/howto.html"
+Repository = "https://github.com/tpapak/netmeta"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/netmeta_mcp"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

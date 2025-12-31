@@ -1,0 +1,9 @@
+# netmeta R package version pinning
+# This file specifies which version of guido-s/netmeta is used by this MCP server
+
+NETMETA_REPO=guido-s/netmeta
+NETMETA_BRANCH=develop
+NETMETA_COMMIT=5ecfc1d7739c3df360a694d60af0563bc43d68ea
+NETMETA_VERSION=3.3-0
+NETMETA_DATE=2025-10-29
+NETMETA_MESSAGE=Consider covariance for pairwise() object with multi-arm studies and SMD as effect measure

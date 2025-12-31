@@ -1,0 +1,209 @@
+{
+  "name": "Senn2013",
+  "description": "Network meta-analysis of antidiabetic drugs",
+  "source": "Senn S, Gavini F, Magrez D, Scheen A (2013)",
+  "outcome": "Mean difference in HbA1c (%)",
+  "sm": "MD",
+  "reference": "Placebo",
+  "n_studies": 26,
+  "n_treatments": 10,
+  "treatments": ["Metformin", "Sulfonylurea", "Rosiglitazone", "Pioglitazone", "Acarbose", "Sitagliptin", "Vildagliptin", "Miglitol", "Benfluorex", "Placebo"],
+  "data": [
+    {
+      "study": "DeFronzo1995",
+      "treat1": "Metformin",
+      "treat2": "Placebo",
+      "TE": -1.9,
+      "seTE": 0.1414
+    },
+    {
+      "study": "Lewin2007",
+      "treat1": "Metformin",
+      "treat2": "Placebo",
+      "TE": -0.82,
+      "seTE": 0.0992
+    },
+    {
+      "study": "Willms1999",
+      "treat1": "Metformin",
+      "treat2": "Acarbose",
+      "TE": -0.2,
+      "seTE": 0.3579
+    },
+    {
+      "study": "Davidson2007",
+      "treat1": "Rosiglitazone",
+      "treat2": "Placebo",
+      "TE": -1.34,
+      "seTE": 0.1435
+    },
+    {
+      "study": "Wolffenbuttel1999",
+      "treat1": "Rosiglitazone",
+      "treat2": "Placebo",
+      "TE": -1.1,
+      "seTE": 0.1141
+    },
+    {
+      "study": "Kipnes2001",
+      "treat1": "Pioglitazone",
+      "treat2": "Placebo",
+      "TE": -1.3,
+      "seTE": 0.1268
+    },
+    {
+      "study": "Kerenyi2004",
+      "treat1": "Rosiglitazone",
+      "treat2": "Placebo",
+      "TE": -0.77,
+      "seTE": 0.1078
+    },
+    {
+      "study": "Hanefeld2004",
+      "treat1": "Pioglitazone",
+      "treat2": "Metformin",
+      "TE": 0.16,
+      "seTE": 0.0849
+    },
+    {
+      "study": "Derosa2004",
+      "treat1": "Pioglitazone",
+      "treat2": "Rosiglitazone",
+      "TE": 0.1,
+      "seTE": 0.1831
+    },
+    {
+      "study": "Baksi2004",
+      "treat1": "Rosiglitazone",
+      "treat2": "Placebo",
+      "TE": -1.3,
+      "seTE": 0.1014
+    },
+    {
+      "study": "Rosenstock2008",
+      "treat1": "Rosiglitazone",
+      "treat2": "Placebo",
+      "TE": -1.09,
+      "seTE": 0.2263
+    },
+    {
+      "study": "Zhu2003",
+      "treat1": "Rosiglitazone",
+      "treat2": "Placebo",
+      "TE": -1.5,
+      "seTE": 0.1624
+    },
+    {
+      "study": "Yang2003",
+      "treat1": "Rosiglitazone",
+      "treat2": "Metformin",
+      "TE": -0.14,
+      "seTE": 0.2239
+    },
+    {
+      "study": "Vongthavaravat2002",
+      "treat1": "Rosiglitazone",
+      "treat2": "Sulfonylurea",
+      "TE": -1.2,
+      "seTE": 0.1436
+    },
+    {
+      "study": "Oyama2008",
+      "treat1": "Acarbose",
+      "treat2": "Sulfonylurea",
+      "TE": -0.4,
+      "seTE": 0.1549
+    },
+    {
+      "study": "Costa1997",
+      "treat1": "Acarbose",
+      "treat2": "Placebo",
+      "TE": -0.8,
+      "seTE": 0.1432
+    },
+    {
+      "study": "Hermansen2007",
+      "treat1": "Sitagliptin",
+      "treat2": "Placebo",
+      "TE": -0.57,
+      "seTE": 0.1291
+    },
+    {
+      "study": "Garber2008",
+      "treat1": "Vildagliptin",
+      "treat2": "Placebo",
+      "TE": -0.7,
+      "seTE": 0.1273
+    },
+    {
+      "study": "Alex1998",
+      "treat1": "Metformin",
+      "treat2": "Sulfonylurea",
+      "TE": -0.37,
+      "seTE": 0.1184
+    },
+    {
+      "study": "Johnston1994",
+      "treat1": "Miglitol",
+      "treat2": "Placebo",
+      "TE": -0.74,
+      "seTE": 0.1839
+    },
+    {
+      "study": "Johnston1998a",
+      "treat1": "Miglitol",
+      "treat2": "Placebo",
+      "TE": -1.41,
+      "seTE": 0.2235
+    },
+    {
+      "study": "Kim2007",
+      "treat1": "Rosiglitazone",
+      "treat2": "Metformin",
+      "TE": 0,
+      "seTE": 0.2339
+    },
+    {
+      "study": "Johnston1998b",
+      "treat1": "Miglitol",
+      "treat2": "Placebo",
+      "TE": -0.68,
+      "seTE": 0.2828
+    },
+    {
+      "study": "Gonzalez-Ortiz2004",
+      "treat1": "Metformin",
+      "treat2": "Placebo",
+      "TE": -0.4,
+      "seTE": 0.4356
+    },
+    {
+      "study": "Stucci1996",
+      "treat1": "Benfluorex",
+      "treat2": "Placebo",
+      "TE": -0.23,
+      "seTE": 0.3467
+    },
+    {
+      "study": "Moulin2006",
+      "treat1": "Benfluorex",
+      "treat2": "Placebo",
+      "TE": -1.01,
+      "seTE": 0.1366
+    },
+    {
+      "study": "Willms1999",
+      "treat1": "Metformin",
+      "treat2": "Placebo",
+      "TE": -1.2,
+      "seTE": 0.3758
+    },
+    {
+      "study": "Willms1999",
+      "treat1": "Acarbose",
+      "treat2": "Placebo",
+      "TE": -1,
+      "seTE": 0.4669
+    }
+  ]
+}

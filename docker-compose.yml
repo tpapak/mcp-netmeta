@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  netmeta-mcp:
+    build: .
+    image: netmeta-mcp:latest
+    container_name: netmeta-mcp
+    ports:
+      - "8000:8000"
+    environment:
+      - R_HOME=/usr/lib/R
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/mcp"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    # Resource limits (adjust as needed)
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 512M

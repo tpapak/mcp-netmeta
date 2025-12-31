@@ -1,0 +1,29 @@
+study,treat1,treat2,TE,seTE
+Study 1,No contact,Individual counselling,-1.0513,0.4132
+Study 1,No contact,Group counselling,-0.1285,0.476
+Study 1,Individual counselling,Group counselling,0.9228,0.3998
+Study 2,Self-help,Individual counselling,-0.0012,0.4504
+Study 2,Self-help,Group counselling,-0.2253,0.3839
+Study 2,Individual counselling,Group counselling,-0.2241,0.3723
+Study 3,No contact,Individual counselling,-2.2023,0.143
+Study 4,No contact,Individual counselling,-0.8704,0.7911
+Study 5,No contact,Individual counselling,-0.4156,0.1557
+Study 6,No contact,Individual counselling,-2.7797,1.4698
+Study 7,No contact,Individual counselling,-2.7054,0.6252
+Study 8,No contact,Individual counselling,-2.4252,1.0423
+Study 9,No contact,Individual counselling,-0.4436,0.522
+Study 10,No contact,Self-help,0.016,0.1699
+Study 11,No contact,Self-help,-0.3935,0.3266
+Study 12,No contact,Individual counselling,-0.3904,0.168
+Study 13,No contact,Individual counselling,-0.1063,0.5956
+Study 14,No contact,Individual counselling,-0.5834,0.2983
+Study 15,No contact,Group counselling,-3.5225,1.497
+Study 16,No contact,Self-help,-0.6796,0.4411
+Study 17,No contact,Individual counselling,-0.5397,0.1401
+Study 18,No contact,Individual counselling,0.1255,0.32
+Study 19,No contact,Individual counselling,0.24,0.1737
+Study 20,No contact,Individual counselling,-0.039,0.1874
+Study 21,Self-help,Individual counselling,0.1517,0.429
+Study 22,Self-help,Group counselling,-1.0435,0.449
+Study 23,Individual counselling,Group counselling,-0.6807,0.4092
+Study 24,Individual counselling,Group counselling,0.4055,0.7139

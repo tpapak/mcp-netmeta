@@ -1,0 +1,209 @@
+{
+  "name": "smokingcessation",
+  "description": "Network meta-analysis of interventions for smoking cessation",
+  "source": "Hasselblad V (1998), Lu & Ades (2006)",
+  "outcome": "Smoking cessation at 6-12 months",
+  "sm": "OR",
+  "reference": "No contact",
+  "n_studies": 24,
+  "n_treatments": 4,
+  "treatments": ["No contact", "Self-help", "Individual counselling", "Group counselling"],
+  "data": [
+    {
+      "study": "Study 1",
+      "treat1": "No contact",
+      "treat2": "Individual counselling",
+      "TE": -1.0513,
+      "seTE": 0.4132
+    },
+    {
+      "study": "Study 1",
+      "treat1": "No contact",
+      "treat2": "Group counselling",
+      "TE": -0.1285,
+      "seTE": 0.476
+    },
+    {
+      "study": "Study 1",
+      "treat1": "Individual counselling",
+      "treat2": "Group counselling",
+      "TE": 0.9228,
+      "seTE": 0.3998
+    },
+    {
+      "study": "Study 2",
+      "treat1": "Self-help",
+      "treat2": "Individual counselling",
+      "TE": -0.0012,
+      "seTE": 0.4504
+    },
+    {
+      "study": "Study 2",
+      "treat1": "Self-help",
+      "treat2": "Group counselling",
+      "TE": -0.2253,
+      "seTE": 0.3839
+    },
+    {
+      "study": "Study 2",
+      "treat1": "Individual counselling",
+      "treat2": "Group counselling",
+      "TE": -0.2241,
+      "seTE": 0.3723
+    },
+    {
+      "study": "Study 3",
+      "treat1": "No contact",
+      "treat2": "Individual counselling",
+      "TE": -2.2023,
+      "seTE": 0.143
+    },
+    {
+      "study": "Study 4",
+      "treat1": "No contact",
+      "treat2": "Individual counselling",
+      "TE": -0.8704,
+      "seTE": 0.7911
+    },
+    {
+      "study": "Study 5",
+      "treat1": "No contact",
+      "treat2": "Individual counselling",
+      "TE": -0.4156,
+      "seTE": 0.1557
+    },
+    {
+      "study": "Study 6",
+      "treat1": "No contact",
+      "treat2": "Individual counselling",
+      "TE": -2.7797,
+      "seTE": 1.4698
+    },
+    {
+      "study": "Study 7",
+      "treat1": "No contact",
+      "treat2": "Individual counselling",
+      "TE": -2.7054,
+      "seTE": 0.6252
+    },
+    {
+      "study": "Study 8",
+      "treat1": "No contact",
+      "treat2": "Individual counselling",
+      "TE": -2.4252,
+      "seTE": 1.0423
+    },
+    {
+      "study": "Study 9",
+      "treat1": "No contact",
+      "treat2": "Individual counselling",
+      "TE": -0.4436,
+      "seTE": 0.522
+    },
+    {
+      "study": "Study 10",
+      "treat1": "No contact",
+      "treat2": "Self-help",
+      "TE": 0.016,
+      "seTE": 0.1699
+    },
+    {
+      "study": "Study 11",
+      "treat1": "No contact",
+      "treat2": "Self-help",
+      "TE": -0.3935,
+      "seTE": 0.3266
+    },
+    {
+      "study": "Study 12",
+      "treat1": "No contact",
+      "treat2": "Individual counselling",
+      "TE": -0.3904,
+      "seTE": 0.168
+    },
+    {
+      "study": "Study 13",
+      "treat1": "No contact",
+      "treat2": "Individual counselling",
+      "TE": -0.1063,
+      "seTE": 0.5956
+    },
+    {
+      "study": "Study 14",
+      "treat1": "No contact",
+      "treat2": "Individual counselling",
+      "TE": -0.5834,
+      "seTE": 0.2983
+    },
+    {
+      "study": "Study 15",
+      "treat1": "No contact",
+      "treat2": "Group counselling",
+      "TE": -3.5225,
+      "seTE": 1.497
+    },
+    {
+      "study": "Study 16",
+      "treat1": "No contact",
+      "treat2": "Self-help",
+      "TE": -0.6796,
+      "seTE": 0.4411
+    },
+    {
+      "study": "Study 17",
+      "treat1": "No contact",
+      "treat2": "Individual counselling",
+      "TE": -0.5397,
+      "seTE": 0.1401
+    },
+    {
+      "study": "Study 18",
+      "treat1": "No contact",
+      "treat2": "Individual counselling",
+      "TE": 0.1255,
+      "seTE": 0.32
+    },
+    {
+      "study": "Study 19",
+      "treat1": "No contact",
+      "treat2": "Individual counselling",
+      "TE": 0.24,
+      "seTE": 0.1737
+    },
+    {
+      "study": "Study 20",
+      "treat1": "No contact",
+      "treat2": "Individual counselling",
+      "TE": -0.039,
+      "seTE": 0.1874
+    },
+    {
+      "study": "Study 21",
+      "treat1": "Self-help",
+      "treat2": "Individual counselling",
+      "TE": 0.1517,
+      "seTE": 0.429
+    },
+    {
+      "study": "Study 22",
+      "treat1": "Self-help",
+      "treat2": "Group counselling",
+      "TE": -1.0435,
+      "seTE": 0.449
+    },
+    {
+      "study": "Study 23",
+      "treat1": "Individual counselling",
+      "treat2": "Group counselling",
+      "TE": -0.6807,
+      "seTE": 0.4092
+    },
+    {
+      "study": "Study 24",
+      "treat1": "Individual counselling",
+      "treat2": "Group counselling",
+      "TE": 0.4055,
+      "seTE": 0.7139
+    }
+  ]
+}

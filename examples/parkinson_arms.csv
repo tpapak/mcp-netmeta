@@ -1,0 +1,16 @@
+study,treatment,mean,sd,n
+Study 1,Placebo,-1.22,3.7,54
+Study 1,Ropinirole,-1.53,4.28,95
+Study 2,Placebo,-0.7,3.7,172
+Study 2,Pramipexole,-2.4,3.4,173
+Study 3,Placebo,-0.3,4.4,76
+Study 3,Pramipexole,-2.6,4.3,71
+Study 3,Bromocriptine,-1.2,4.3,81
+Study 4,Ropinirole,-0.24,3,128
+Study 4,Bromocriptine,-0.59,3,72
+Study 5,Ropinirole,-0.73,3,80
+Study 5,Bromocriptine,-0.18,3,46
+Study 6,Bromocriptine,-2.2,2.31,137
+Study 6,Cabergoline,-2.5,2.18,131
+Study 7,Bromocriptine,-1.8,2.48,154
+Study 7,Cabergoline,-2.1,2.99,143

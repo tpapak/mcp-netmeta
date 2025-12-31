@@ -1,0 +1,120 @@
+{
+  "name": "parkinson",
+  "description": "Network meta-analysis of treatments for Parkinsons disease",
+  "source": "Defined daily doses of dopamine agonists",
+  "outcome": "Mean off-time reduction (hours)",
+  "sm": "MD",
+  "reference": "Placebo",
+  "format": "arm-level",
+  "n_studies": 7,
+  "n_treatments": 5,
+  "treatments": ["Placebo", "Pramipexole", "Ropinirole", "Bromocriptine", "Cabergoline"],
+  "note": "Use pairwise_to_netmeta tool with outcome_type=continuous to convert to pairwise format",
+  "data": [
+    {
+      "study": "Study 1",
+      "treatment": "Placebo",
+      "mean": -1.22,
+      "sd": 3.7,
+      "n": 54
+    },
+    {
+      "study": "Study 1",
+      "treatment": "Ropinirole",
+      "mean": -1.53,
+      "sd": 4.28,
+      "n": 95
+    },
+    {
+      "study": "Study 2",
+      "treatment": "Placebo",
+      "mean": -0.7,
+      "sd": 3.7,
+      "n": 172
+    },
+    {
+      "study": "Study 2",
+      "treatment": "Pramipexole",
+      "mean": -2.4,
+      "sd": 3.4,
+      "n": 173
+    },
+    {
+      "study": "Study 3",
+      "treatment": "Placebo",
+      "mean": -0.3,
+      "sd": 4.4,
+      "n": 76
+    },
+    {
+      "study": "Study 3",
+      "treatment": "Pramipexole",
+      "mean": -2.6,
+      "sd": 4.3,
+      "n": 71
+    },
+    {
+      "study": "Study 3",
+      "treatment": "Bromocriptine",
+      "mean": -1.2,
+      "sd": 4.3,
+      "n": 81
+    },
+    {
+      "study": "Study 4",
+      "treatment": "Ropinirole",
+      "mean": -0.24,
+      "sd": 3,
+      "n": 128
+    },
+    {
+      "study": "Study 4",
+      "treatment": "Bromocriptine",
+      "mean": -0.59,
+      "sd": 3,
+      "n": 72
+    },
+    {
+      "study": "Study 5",
+      "treatment": "Ropinirole",
+      "mean": -0.73,
+      "sd": 3,
+      "n": 80
+    },
+    {
+      "study": "Study 5",
+      "treatment": "Bromocriptine",
+      "mean": -0.18,
+      "sd": 3,
+      "n": 46
+    },
+    {
+      "study": "Study 6",
+      "treatment": "Bromocriptine",
+      "mean": -2.2,
+      "sd": 2.31,
+      "n": 137
+    },
+    {
+      "study": "Study 6",
+      "treatment": "Cabergoline",
+      "mean": -2.5,
+      "sd": 2.18,
+      "n": 131
+    },
+    {
+      "study": "Study 7",
+      "treatment": "Bromocriptine",
+      "mean": -1.8,
+      "sd": 2.48,
+      "n": 154
+    },
+    {
+      "study": "Study 7",
+      "treatment": "Cabergoline",
+      "mean": -2.1,
+      "sd": 2.99,
+      "n": 143
+    }
+  ]
+}
