@@ -42,7 +42,7 @@ A public hosted server is available at:
 
 | Server | URL | Status |
 |--------|-----|--------|
-| Biostatistics AUTH | `https://biostatistics.med.auth.gr/mcp/netmeta/mcp` | Available |
+| Biostatistics AUTH | `https://biostatistics.med.auth.gr/mcp/netmeta` | Available |
 
 No installation required for hosted servers. Simply configure your MCP client to connect to the URL:
 
@@ -50,7 +50,7 @@ No installation required for hosted servers. Simply configure your MCP client to
 {
   "mcpServers": {
     "netmeta": {
-      "url": "https://biostatistics.med.auth.gr/mcp/netmeta/mcp"
+      "url": "https://biostatistics.med.auth.gr/mcp/netmeta"
     }
   }
 }

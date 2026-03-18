@@ -1,7 +1,7 @@
 services:
   # ------------------------------------------------------------------
   # Main NMA server — runs network meta-analysis
-  # Endpoint: https://biostatistics.med.auth.gr/mcp/netmeta/mcp
+  # Endpoint: https://biostatistics.med.auth.gr/mcp/netmeta
   # ------------------------------------------------------------------
   netmeta-mcp:
     build:
@@ -14,7 +14,8 @@ services:
     environment:
       - R_HOME=/usr/lib/R
       - PYTHONUNBUFFERED=1
-      - ROOT_PATH=/mcp/netmeta
+      # ROOT_PATH is empty — nginx rewrites /mcp/netmeta → /mcp internally
+      - ROOT_PATH=
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/mcp"]
@@ -31,7 +32,7 @@ services:
 
   # ------------------------------------------------------------------
   # Verify server — verifies NMA results and generates R code
-  # Endpoint: https://biostatistics.med.auth.gr/mcp/netmeta-verify/mcp
+  # Endpoint: https://biostatistics.med.auth.gr/mcp/netmeta-verify
   # ------------------------------------------------------------------
   netmeta-verify-mcp:
     build:
@@ -44,7 +45,8 @@ services:
     environment:
       - R_HOME=/usr/lib/R
       - PYTHONUNBUFFERED=1
-      - ROOT_PATH=/mcp/netmeta-verify
+      # ROOT_PATH is empty — nginx rewrites /mcp/netmeta-verify → /mcp internally
+      - ROOT_PATH=
       - PORT=8001
       - VERIFIERS_DIR=/opt/mcp/verifier
     restart: unless-stopped
