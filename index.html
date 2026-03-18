@@ -501,77 +501,136 @@ curl http://localhost:8000/mcp       # quick test</pre>
   </p>
 </footer>
 
-<script src="../terminal-anim.js"></script>
 <script>
-const scenes = [
-  [
-    { type: 'input', text: 'conda activate netmeta-mcp' },
-    { type: 'pause', ms: 350 },
-    { type: 'input', text: 'python -m netmeta_mcp.http_server' },
-    { type: 'pause', ms: 500 },
-    { type: 'line',  text: '[g]INFO[/g]     Uvicorn running on http://0.0.0.0:8000' },
-    { type: 'line',  text: '[g]INFO[/g]     MCP endpoint: http://localhost:8000/mcp' },
-    { type: 'pause', ms: 900 },
-    { type: 'output', text:
-`# In your AI client — paste CSV and ask:
-Run a network meta-analysis. Use "Placebo" as reference.
+'use strict';
+const _sleep = ms => new Promise(r => setTimeout(r, ms));
+function _col(s){
+  return (s||'')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\[g\](.*?)\[\/g\]/g,'<span style="color:#3ecf8e">$1</span>')
+    .replace(/\[b\](.*?)\[\/b\]/g,'<span style="color:#4f8ef7">$1</span>')
+    .replace(/\[y\](.*?)\[\/y\]/g,'<span style="color:#f5a623">$1</span>')
+    .replace(/\[w\](.*?)\[\/w\]/g,'<span style="color:#e2e8f0">$1</span>');
+}
+async function _type(el, prompt, pcolor, text, tcolor, spd) {
+  const row = document.createElement('div');
+  row.className = 'tl';
+  // use existing .tl style from the page (white-space:pre-wrap)
+  row.style.cssText = 'min-height:1.1em;white-space:pre-wrap;word-break:break-all;';
+  el.appendChild(row);
+  const ps = document.createElement('span');
+  ps.style.color = pcolor||'#3ecf8e'; ps.textContent = prompt; row.appendChild(ps);
+  const cur = document.createElement('span');
+  cur.style.cssText = 'display:inline-block;animation:_blink .9s step-end infinite;color:#3ecf8e';
+  cur.textContent='▋'; row.appendChild(cur);
+  const ts = document.createElement('span');
+  ts.style.color = tcolor||'#e2e8f0'; row.insertBefore(ts, cur);
+  for(const ch of text){ ts.textContent+=ch; el.scrollTop=el.scrollHeight;
+    await _sleep((spd||38)+Math.random()*14-7); }
+  row.removeChild(cur);
+}
+function _line(el, html, color){
+  const d=document.createElement('div');
+  d.style.cssText='min-height:1.1em;white-space:pre-wrap;word-break:break-all;color:'+(color||'#8892a4');
+  d.innerHTML=_col(html); el.appendChild(d); el.scrollTop=el.scrollHeight;
+}
+if(!document.getElementById('_blink_kf')){
+  const s=document.createElement('style');
+  s.id='_blink_kf';
+  s.textContent='@keyframes _blink{0%,100%{opacity:1}50%{opacity:0}}';
+  document.head.appendChild(s);
+}
 
-study,treat1,treat2,TE,seTE
-Study1,Placebo,DrugA,0.51,0.20
-Study2,Placebo,DrugB,0.83,0.25
-Study3,DrugA,DrugB,0.30,0.22`, color: '#c9d6e8' },
-    { type: 'pause', ms: 800 },
-    { type: 'line', text: '[y]→[/y] [w]csv_to_json[/w]' },
-    { type: 'line', text: '[y]→[/y] [w]runnetmeta[/w]   [g]sm=OR  reference=Placebo[/g]' },
-    { type: 'line', text: '[y]→[/y] [w]get_ranking[/w]' },
-    { type: 'pause', ms: 700 },
-    { type: 'output', text:
-`Rankings (P-score, random effects):
+async function runNetmetaAnim(){
+  const el = document.getElementById('anim-netmeta');
+  while(true){
+    el.innerHTML='';
 
-  [g]1. DrugB[/g]   P-score = [g]0.912[/g]
-  [w]2. DrugA[/w]   P-score = [w]0.541[/w]
-  3. Placebo  P-score = 0.047
+    /* scene 1: hosted server, paste CSV, get results */
+    _line(el,'<span style="color:#5a6a82"># Using the hosted server — no local install needed</span>');
+    await _sleep(500);
+    _line(el,'');
+    await _type(el,'You: ','#4f8ef7',
+      'Run NMA on this data. Placebo as reference, show rankings.',
+      '#c9d6e8', 34);
+    await _sleep(300);
+    _line(el,'');
+    for(const ln of [
+      'study,treat1,treat2,TE,seTE',
+      'Study1,Placebo,DrugA,0.51,0.20',
+      'Study2,Placebo,DrugB,0.83,0.25',
+      'Study3,DrugA,DrugB,0.30,0.22',
+    ]){ _line(el, ln, '#c9d6e8'); await _sleep(60); }
 
-τ² = 0.012   I² = 18.4 %` },
-    { type: 'pause', ms: 2800 },
-  ],
-  [
-    { type: 'output', text: '# Arm-level binary data workflow', color: '#5a6a82' },
-    { type: 'pause', ms: 400 },
-    { type: 'output', text:
-`Convert this arm-level data and run NMA with OR.
+    await _sleep(700);
+    _line(el,'');
+    _line(el,'<span style="color:#9b6dff;font-weight:600">Assistant</span> — calling tools:');
+    await _sleep(300);
+    for(const [t,a] of [
+      ['csv_to_json','format=pairwise'],
+      ['runnetmeta','sm=OR  reference=Placebo'],
+      ['get_ranking','random=true'],
+    ]){
+      _line(el,`  [y]⚙[/y] [w]${t}[/w]  [g]${a}[/g]`);
+      await _sleep(500);
+    }
+    await _sleep(400);
+    _line(el,'');
+    for(const ln of [
+      '[w]Treatment rankings (P-score, random effects):[/w]',
+      '',
+      '  [g]1. DrugB[/g]   P-score = [g]0.912[/g]',
+      '  [w]2. DrugA[/w]   P-score = [w]0.541[/w]',
+      '  3. Placebo  P-score = 0.047',
+      '',
+      'Heterogeneity: τ² = 0.012   I² = 18.4 %',
+    ]){ _line(el, ln); await _sleep(80); }
 
-study,treatment,events,n
-Trial1,Placebo,20,100
-Trial1,SSRI,35,100
-Trial2,Placebo,18,80
-Trial2,CBT,30,80
-Trial3,SSRI,40,120
-Trial3,CBT,45,120`, color: '#c9d6e8' },
-    { type: 'pause', ms: 700 },
-    { type: 'line', text: '[y]→[/y] [w]csv_to_json[/w]   [g]format=arm_binary[/g]' },
-    { type: 'line', text: '[y]→[/y] [w]pairwise_to_netmeta[/w]' },
-    { type: 'line', text: '[y]→[/y] [w]runnetmeta[/w]   [g]sm=OR[/g]' },
-    { type: 'line', text: '[y]→[/y] [w]get_network_graph[/w]' },
-    { type: 'pause', ms: 600 },
-    { type: 'output', text:
-`Network: 3 nodes, 3 edges
-  Placebo ── SSRI   (2 studies)
-  Placebo ── CBT    (1 study)
-  SSRI    ── CBT    (1 study)
+    await _sleep(3000);
+    el.innerHTML='';
 
-[g]1. CBT[/g]    OR = 2.41 [1.54, 3.77]  P = [g]0.831[/g]
-[w]2. SSRI[/w]   OR = 1.98 [1.23, 3.18]  P = [w]0.612[/w]
-3. Placebo                         P = 0.057` },
-    { type: 'pause', ms: 3000 },
-  ],
-];
+    /* scene 2: arm-level data */
+    await _type(el,'You: ','#4f8ef7',
+      'Convert arm-level binary data and run NMA with OR.',
+      '#c9d6e8', 34);
+    await _sleep(300);
+    _line(el,'');
+    for(const ln of [
+      'study,treatment,events,n',
+      'Trial1,Placebo,20,100',
+      'Trial1,SSRI,35,100',
+      'Trial2,Placebo,18,80',
+      'Trial2,CBT,30,80',
+    ]){ _line(el, ln, '#c9d6e8'); await _sleep(60); }
 
-new TerminalAnim(
-  document.getElementById('anim-netmeta'),
-  scenes,
-  { typeSpeed: 36, pauseAfter: 1000, promptStr: '$ ' }
-);
+    await _sleep(700);
+    _line(el,'');
+    for(const [t,a] of [
+      ['csv_to_json','format=arm_binary'],
+      ['pairwise_to_netmeta','outcome_type=binary'],
+      ['runnetmeta','sm=OR'],
+      ['get_network_graph',''],
+    ]){
+      _line(el,`  [y]⚙[/y] [w]${t}[/w]${a?' [g]'+a+'[/g]':''}`);
+      await _sleep(480);
+    }
+    await _sleep(400);
+    _line(el,'');
+    for(const ln of [
+      'Network: 3 nodes, 3 edges',
+      '  Placebo ── SSRI  (2 studies)',
+      '  Placebo ── CBT   (1 study)',
+      '  SSRI    ── CBT   (1 study)',
+      '',
+      '[g]1. CBT[/g]    OR=2.41 [1.54,3.77]  P=[g]0.831[/g]',
+      '[w]2. SSRI[/w]   OR=1.98 [1.23,3.18]  P=[w]0.612[/w]',
+      '3. Placebo                      P=0.057',
+    ]){ _line(el, ln); await _sleep(85); }
+
+    await _sleep(3200);
+  }
+}
+runNetmetaAnim();
 </script>
 
 </body>
