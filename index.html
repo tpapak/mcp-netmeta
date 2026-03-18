@@ -152,6 +152,18 @@
     Run frequentist NMA, retrieve rankings, league tables, and network graphs
     from any MCP-compatible client.
   </p>
+
+  <div style="max-width:780px; margin:2rem 0 0;">
+    <div class="ta-wrap">
+      <div class="ta-titlebar">
+        <span class="ta-dot red"></span>
+        <span class="ta-dot yellow"></span>
+        <span class="ta-dot green"></span>
+        <span class="ta-title">netmeta-mcp &mdash; bash</span>
+      </div>
+      <div id="anim-netmeta"></div>
+    </div>
+  </div>
 </div>
 
 <div class="layout">
@@ -488,6 +500,79 @@ curl http://localhost:8000/mcp       # quick test</pre>
     <a href="https://biostatistics.med.auth.gr" target="_blank">Biostatistics AUTH</a>
   </p>
 </footer>
+
+<script src="../terminal-anim.js"></script>
+<script>
+const scenes = [
+  [
+    { type: 'input', text: 'conda activate netmeta-mcp' },
+    { type: 'pause', ms: 350 },
+    { type: 'input', text: 'python -m netmeta_mcp.http_server' },
+    { type: 'pause', ms: 500 },
+    { type: 'line',  text: '[g]INFO[/g]     Uvicorn running on http://0.0.0.0:8000' },
+    { type: 'line',  text: '[g]INFO[/g]     MCP endpoint: http://localhost:8000/mcp' },
+    { type: 'pause', ms: 900 },
+    { type: 'output', text:
+`# In your AI client — paste CSV and ask:
+Run a network meta-analysis. Use "Placebo" as reference.
+
+study,treat1,treat2,TE,seTE
+Study1,Placebo,DrugA,0.51,0.20
+Study2,Placebo,DrugB,0.83,0.25
+Study3,DrugA,DrugB,0.30,0.22`, color: '#c9d6e8' },
+    { type: 'pause', ms: 800 },
+    { type: 'line', text: '[y]→[/y] [w]csv_to_json[/w]' },
+    { type: 'line', text: '[y]→[/y] [w]runnetmeta[/w]   [g]sm=OR  reference=Placebo[/g]' },
+    { type: 'line', text: '[y]→[/y] [w]get_ranking[/w]' },
+    { type: 'pause', ms: 700 },
+    { type: 'output', text:
+`Rankings (P-score, random effects):
+
+  [g]1. DrugB[/g]   P-score = [g]0.912[/g]
+  [w]2. DrugA[/w]   P-score = [w]0.541[/w]
+  3. Placebo  P-score = 0.047
+
+τ² = 0.012   I² = 18.4 %` },
+    { type: 'pause', ms: 2800 },
+  ],
+  [
+    { type: 'output', text: '# Arm-level binary data workflow', color: '#5a6a82' },
+    { type: 'pause', ms: 400 },
+    { type: 'output', text:
+`Convert this arm-level data and run NMA with OR.
+
+study,treatment,events,n
+Trial1,Placebo,20,100
+Trial1,SSRI,35,100
+Trial2,Placebo,18,80
+Trial2,CBT,30,80
+Trial3,SSRI,40,120
+Trial3,CBT,45,120`, color: '#c9d6e8' },
+    { type: 'pause', ms: 700 },
+    { type: 'line', text: '[y]→[/y] [w]csv_to_json[/w]   [g]format=arm_binary[/g]' },
+    { type: 'line', text: '[y]→[/y] [w]pairwise_to_netmeta[/w]' },
+    { type: 'line', text: '[y]→[/y] [w]runnetmeta[/w]   [g]sm=OR[/g]' },
+    { type: 'line', text: '[y]→[/y] [w]get_network_graph[/w]' },
+    { type: 'pause', ms: 600 },
+    { type: 'output', text:
+`Network: 3 nodes, 3 edges
+  Placebo ── SSRI   (2 studies)
+  Placebo ── CBT    (1 study)
+  SSRI    ── CBT    (1 study)
+
+[g]1. CBT[/g]    OR = 2.41 [1.54, 3.77]  P = [g]0.831[/g]
+[w]2. SSRI[/w]   OR = 1.98 [1.23, 3.18]  P = [w]0.612[/w]
+3. Placebo                         P = 0.057` },
+    { type: 'pause', ms: 3000 },
+  ],
+];
+
+new TerminalAnim(
+  document.getElementById('anim-netmeta'),
+  scenes,
+  { typeSpeed: 36, pauseAfter: 1000, promptStr: '$ ' }
+);
+</script>
 
 </body>
 </html>
