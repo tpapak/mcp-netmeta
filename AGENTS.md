@@ -16,9 +16,9 @@ Available commmands
 
 ## Deployment
 - Docker
-- hosted in cinema.med.auth.gr/mcp/netmeta
+- hosted in biostatistics.med.auth.gr/mcp/netmeta
 
 ## Documentation
 - make examples from the netmeta package
-- build webpage to show how run examples cinema.med.auth.gr/mcp/howto.html
+- build webpage to show how run examples biostatistics.med.auth.gr/mcp/howto.html
 - I will record a screenshot using my local llm setup on how to use it and maybe an example with gpt and anthropic webuis 

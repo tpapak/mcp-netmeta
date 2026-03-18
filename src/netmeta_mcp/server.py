@@ -38,8 +38,17 @@ mcp = FastMCP(
     """,
 )
 
-# Initialize R bridge
-r_bridge = NetmetaBridge()
+# Lazy-initialised so the server process starts cleanly even when
+# R / the netmeta package are not yet installed.  The bridge is created
+# on the first tool call rather than at import time.
+_r_bridge: NetmetaBridge | None = None
+
+
+def _get_bridge() -> NetmetaBridge:
+    global _r_bridge
+    if _r_bridge is None:
+        _r_bridge = NetmetaBridge()
+    return _r_bridge
 
 
 @mcp.tool()
@@ -76,7 +85,7 @@ def runnetmeta(
         - heterogeneity: Heterogeneity statistics (tau2, I2)
         - inconsistency: Inconsistency test results
     """
-    return r_bridge.run_netmeta(
+    return _get_bridge().run_netmeta(
         data=data,
         sm=sm,
         reference=reference,
@@ -95,7 +104,7 @@ def get_network_graph() -> dict[str, Any]:
         - nodes: List of treatment nodes with labels
         - edges: List of edges with study counts and sample sizes
     """
-    return r_bridge.get_network_graph()
+    return _get_bridge().get_network_graph()
 
 
 @mcp.tool()
@@ -113,7 +122,7 @@ def get_league_table(random: bool = True) -> dict[str, Any]:
         - ci_lower: Matrix of lower confidence intervals
         - ci_upper: Matrix of upper confidence intervals
     """
-    return r_bridge.get_league_table(random=random)
+    return _get_bridge().get_league_table(random=random)
 
 
 @mcp.tool()
@@ -130,7 +139,7 @@ def get_ranking(random: bool = True) -> dict[str, Any]:
         - p_scores: P-score for each treatment (0-1, higher is better)
         - rank: Rank of each treatment (1 = best)
     """
-    return r_bridge.get_ranking(random=random)
+    return _get_bridge().get_ranking(random=random)
 
 
 @mcp.tool()
@@ -149,14 +158,14 @@ def get_forest_data(
         - reference: The reference treatment
         - comparisons: List of dicts with treatment, effect, ci_lower, ci_upper
     """
-    return r_bridge.get_forest_data(reference=reference, random=random)
+    return _get_bridge().get_forest_data(reference=reference, random=random)
 
 
 @mcp.tool()
 def pairwise_to_netmeta(
     data: list[dict[str, Any]],
     outcome_type: str = "binary",
-) -> list[dict[str, Any]]:
+) -> list[dict[str, Any]] | dict[str, Any]:
     """
     Convert arm-level data to pairwise contrast format for netmeta.
 
@@ -180,7 +189,7 @@ def pairwise_to_netmeta(
     Returns:
         List of pairwise contrasts ready for runnetmeta
     """
-    return r_bridge.pairwise_to_netmeta(data=data, outcome_type=outcome_type)
+    return _get_bridge().pairwise_to_netmeta(data=data, outcome_type=outcome_type)
 
 
 @mcp.tool()

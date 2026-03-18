@@ -1,16 +1,14 @@
 """
-NetMeta MCP HTTP Server
+NetMeta Verify MCP HTTP Server
 
-Run the MCP server with Streamable HTTP transport for web deployment.
+Run the verifier MCP server with Streamable HTTP transport for web deployment.
 
-When deployed behind a reverse proxy (e.g., nginx) at a subpath like
-/mcp/netmeta, set the ROOT_PATH environment variable so the server
-generates correct URLs. The reverse proxy should strip the prefix
-before forwarding requests to this server.
+When deployed behind a reverse proxy at /mcp/netmeta-verify, set
+ROOT_PATH=/mcp/netmeta-verify so the server generates correct URLs.
 
 Example nginx config:
-    location /mcp/netmeta/ {
-        proxy_pass http://localhost:8000/;
+    location /mcp/netmeta-verify/ {
+        proxy_pass http://localhost:8001/;
     }
 """
 
@@ -25,20 +23,16 @@ from .server import mcp
 
 @contextlib.asynccontextmanager
 async def lifespan(app: Starlette):
-    """Manage server lifecycle."""
     async with mcp.session_manager.run():
         yield
 
 
-# Create Starlette app with MCP mounted
-# Note: streamable_http_app() already includes /mcp route internally
 http_app = mcp.streamable_http_app()
 app = Starlette(
     routes=http_app.routes,
     lifespan=lifespan,
 )
 
-# Add CORS middleware for browser clients
 app = CORSMiddleware(
     app,
     allow_origins=["*"],
@@ -52,11 +46,11 @@ def main():
     import uvicorn
 
     host = os.environ.get("HOST", "0.0.0.0")
-    port = int(os.environ.get("PORT", "8000"))
+    port = int(os.environ.get("PORT", "8001"))
     root_path = os.environ.get("ROOT_PATH", "")
 
     uvicorn.run(
-        "netmeta_mcp.http_server:app",
+        "netmeta_verify.http_server:app",
         host=host,
         port=port,
         root_path=root_path,

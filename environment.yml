@@ -1,8 +1,13 @@
-# Conda environment for netmeta MCP server
-# 
-# After creating the environment, install netmeta from GitHub:
+# Conda environment for netmeta MCP server (both netmeta-mcp and netmeta-verify-mcp)
+#
+# After creating the environment, install R packages from GitHub:
+#
+#   # Required by both servers
 #   R -e "remotes::install_github('guido-s/netmeta@5ecfc1d7739c3df360a694d60af0563bc43d68ea')"
-# 
+#
+#   # Required by netmeta-verify-mcp only
+#   R -e "remotes::install_github('tpapak/multiarmvars')"
+#
 # See NETMETA_VERSION file for version details
 #
 name: netmeta-mcp
@@ -12,11 +17,12 @@ channels:
 dependencies:
   # Python
   - python=3.11
-  # R base and dependencies (netmeta installed separately from GitHub)
+  # R base and dependencies (netmeta / multiarmvars installed separately from GitHub)
   - r-base=4.3
   - r-meta
   - r-jsonlite
   - r-remotes
+  - r-igraph        # required by multiarmvars (netmeta-verify-mcp)
   # Python packages via pip
   - pip
   - pip:

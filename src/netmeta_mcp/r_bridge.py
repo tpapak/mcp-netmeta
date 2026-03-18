@@ -54,7 +54,10 @@ class NetmetaBridge:
         check_code = 'cat(requireNamespace("netmeta", quietly=TRUE))'
         result = self._run_r_code(check_code)
         if result.strip() != "TRUE":
-            raise RuntimeError("R package 'netmeta' is not installed")
+            raise RuntimeError(
+                "R package 'netmeta' is not installed. Run:\n"
+                "  R -e \"remotes::install_github('guido-s/netmeta@5ecfc1d7739c3df360a694d60af0563bc43d68ea')\""
+            )
 
         # Store state file path for persisting netmeta results between calls
         self._state_file = Path(tempfile.gettempdir()) / "netmeta_state.rds"

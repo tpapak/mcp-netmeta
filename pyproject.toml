@@ -7,16 +7,17 @@ name = "netmeta-mcp"
 version = "0.1.0"
 description = "MCP server for network meta-analysis using the R netmeta package"
 readme = "README.md"
-license = "MIT"
+license = "GPL-3.0-or-later"
 requires-python = ">=3.10"
 authors = [
-    { name = "Your Name", email = "your.email@example.com" }
+    { name = "Thodoris Papakonstantinou" },
+    { name = "Guido Schwarzer" },
 ]
 keywords = ["mcp", "network-meta-analysis", "netmeta", "evidence-synthesis"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: MIT License",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -39,15 +40,16 @@ http = [
 ]
 
 [project.scripts]
-netmeta-mcp = "netmeta_mcp.server:main"
+netmeta-mcp        = "netmeta_mcp.server:main"
+netmeta-verify-mcp = "netmeta_verify.server:main"
 
 [project.urls]
-Homepage = "https://github.com/tpapak/netmeta"
-Documentation = "https://cinema.med.auth.gr/mcp/howto.html"
-Repository = "https://github.com/tpapak/netmeta"
+Homepage = "https://github.com/tpapak/mcp-netmeta"
+Documentation = "https://biostatistics.med.auth.gr/mcp/netmeta"
+Repository = "https://github.com/tpapak/mcp-netmeta"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/netmeta_mcp"]
+packages = ["src/netmeta_mcp", "src/netmeta_verify"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

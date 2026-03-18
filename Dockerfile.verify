@@ -1,14 +1,14 @@
-# NetMeta MCP Server Dockerfile
-# Build: docker build -t netmeta-mcp .
-# Run: docker run -p 8000:8000 netmeta-mcp
+# NetMeta Verify MCP Server Dockerfile
+# Build: docker build -f Dockerfile.verify -t netmeta-verify-mcp .
+# Run:   docker run -p 8001:8001 netmeta-verify-mcp
 
 FROM rocker/r-ver:4.3.2
 
 LABEL maintainer="Thodoris Papakonstantinou"
-LABEL description="MCP server for network meta-analysis using R netmeta package"
+LABEL description="MCP server for NMA verification and R code generation"
 LABEL org.opencontainers.image.source="https://github.com/tpapak/mcp-netmeta"
 
-# Install system dependencies (cmake needed for nloptr R package)
+# System dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 \
     python3-pip \
@@ -24,65 +24,59 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libjpeg-dev \
     libgit2-dev \
     libnlopt-dev \
+    libglpk-dev \
     cmake \
     git \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Install R dependencies step by step
-# First install core packages
+# Core R packages
 RUN R -e "install.packages(c('jsonlite', 'remotes'), repos='https://cloud.r-project.org/')"
 
-# Install lme4 and xml2 which are required by meta
-# lme4 has complex deps but doesn't require rgl for basic functionality
-RUN R -e "install.packages(c('lme4', 'xml2'), repos='https://cloud.r-project.org/', dependencies=TRUE)"
+# igraph (required by multiarmvars)
+RUN R -e "install.packages('igraph', repos='https://cloud.r-project.org/')"
 
-# Install metafor and meta
+# lme4 / meta / metafor (netmeta deps)
+RUN R -e "install.packages(c('lme4', 'xml2'), repos='https://cloud.r-project.org/', dependencies=TRUE)"
 RUN R -e "install.packages(c('metafor', 'meta'), repos='https://cloud.r-project.org/', dependencies=TRUE)" && \
     R -e "if (!requireNamespace('meta', quietly=TRUE)) stop('meta installation failed')"
 
-# Install netmeta from guido-s/netmeta develop branch at pinned commit
-# See NETMETA_VERSION file for version details
+# netmeta from pinned commit
 ARG NETMETA_COMMIT=5ecfc1d7739c3df360a694d60af0563bc43d68ea
 RUN R -e "remotes::install_github('guido-s/netmeta@${NETMETA_COMMIT}', dependencies=FALSE)" && \
     R -e "if (!requireNamespace('netmeta', quietly=TRUE)) stop('netmeta installation failed')"
 
-# Create non-root user for security
+# multiarmvars (required for multi-arm variance recovery in verifiers)
+RUN R -e "remotes::install_github('tpapak/multiarmvars')" && \
+    R -e "if (!requireNamespace('multiarmvars', quietly=TRUE)) stop('multiarmvars installation failed')"
+
+# Non-root user
 RUN useradd -m -s /bin/bash -u 1000 netmeta
 
-# Create app directory
 WORKDIR /app
 
-# Create and activate virtual environment
+# Python virtual environment
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
-
-# Upgrade pip
 RUN pip install --upgrade pip
 
-# Copy project files
+# Copy project
 COPY pyproject.toml .
 COPY src/ src/
+COPY verifiers/ verifiers/
 COPY README.md .
 
 # Install Python package with HTTP dependencies
 RUN pip install ".[http]"
 
-# Change ownership to netmeta user
 RUN chown -R netmeta:netmeta /app /opt/venv
-
-# Switch to non-root user
 USER netmeta
 
-# Expose port for HTTP transport
-EXPOSE 8000
+EXPOSE 8001
 
-# Set environment variables
 ENV PYTHONUNBUFFERED=1
 
-# Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:8000/mcp || exit 1
+    CMD curl -f http://localhost:8001/mcp || exit 1
 
-# Run the MCP server with HTTP transport
-CMD ["python", "-m", "netmeta_mcp.http_server"]
+CMD ["python", "-m", "netmeta_verify.http_server"]

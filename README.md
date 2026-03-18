@@ -38,11 +38,11 @@ This server enables AI assistants to perform network meta-analysis, a statistica
 
 ### Option 1: Public Hosted Server
 
-A public hosted server will soon be available at:
+A public hosted server is available at:
 
 | Server | URL | Status |
 |--------|-----|--------|
-| CINeMA | `https://cinema.med.auth.gr/mcp-netmeta` | Coming soon |
+| Biostatistics AUTH | `https://biostatistics.med.auth.gr/mcp/netmeta/mcp` | Available |
 
 No installation required for hosted servers. Simply configure your MCP client to connect to the URL:
 
@@ -50,7 +50,7 @@ No installation required for hosted servers. Simply configure your MCP client to
 {
   "mcpServers": {
     "netmeta": {
-      "url": "https://cinema.med.auth.gr/mcp-netmeta"
+      "url": "https://biostatistics.med.auth.gr/mcp/netmeta/mcp"
     }
   }
 }
@@ -139,6 +139,39 @@ Example conda paths:
   }
 }
 ```
+
+---
+
+### Option 3: Docker
+
+```bash
+# Clone the repository
+git clone https://github.com/tpapak/mcp-netmeta.git
+cd mcp-netmeta
+
+# Build and run
+docker compose up -d
+```
+
+The MCP endpoint will be available at `http://localhost:8000/mcp`.
+
+```json
+{
+  "mcpServers": {
+    "netmeta": {
+      "url": "http://localhost:8000/mcp"
+    }
+  }
+}
+```
+
+### Option 4: Install from PyPI
+
+```bash
+pip install netmeta-mcp
+```
+
+Note: R 4.0+ with the netmeta package must be installed separately.
 
 ---
 
