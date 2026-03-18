@@ -5,7 +5,7 @@
 FROM rocker/r-ver:4.3.2
 
 LABEL maintainer="Thodoris Papakonstantinou"
-LABEL description="MCP server for NMA verification and R code generation"
+LABEL description="verify-mcp: MCP server for NMA verification and R code generation"
 LABEL org.opencontainers.image.source="https://github.com/tpapak/mcp-netmeta"
 
 # System dependencies

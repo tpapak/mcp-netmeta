@@ -34,12 +34,12 @@ services:
   # Verify server — verifies NMA results and generates R code
   # Endpoint: https://biostatistics.med.auth.gr/mcp/netmeta-verify
   # ------------------------------------------------------------------
-  netmeta-verify-mcp:
+  verify-mcp:
     build:
       context: .
       dockerfile: Dockerfile.verify
-    image: netmeta-verify-mcp:latest
-    container_name: netmeta-verify-mcp
+    image: verify-mcp:latest
+    container_name: verify-mcp
     ports:
       - "127.0.0.1:8001:8001"
     volumes:
