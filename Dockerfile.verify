@@ -60,10 +60,15 @@ RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 RUN pip install --upgrade pip
 
+# Clone the mcp/verifier R scripts from the mcp repo
+# They live at /opt/mcp/verifier inside the image
+ARG MCP_REPO=https://github.com/tpapak/mcp
+ARG MCP_BRANCH=main
+RUN git clone --depth 1 --branch ${MCP_BRANCH} ${MCP_REPO} /opt/mcp
+
 # Copy project
 COPY pyproject.toml .
 COPY src/ src/
-COPY verifiers/ verifiers/
 COPY README.md .
 
 # Install Python package with HTTP dependencies
@@ -75,6 +80,7 @@ USER netmeta
 EXPOSE 8001
 
 ENV PYTHONUNBUFFERED=1
+ENV VERIFIERS_DIR=/opt/mcp/verifier
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:8001/mcp || exit 1

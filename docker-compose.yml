@@ -46,6 +46,7 @@ services:
       - PYTHONUNBUFFERED=1
       - ROOT_PATH=/mcp/netmeta-verify
       - PORT=8001
+      - VERIFIERS_DIR=/opt/mcp/verifier
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8001/mcp"]

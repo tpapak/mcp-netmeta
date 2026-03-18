@@ -2,12 +2,12 @@
 R Bridge for NetMeta Verifiers
 
 Provides Python interface to the verifier R scripts using subprocess.
+The verifier scripts live in the separate mcp/verifier repository
+(https://github.com/tpapak/mcp) at ../mcp/verifier relative to this repo.
 The verifier scripts use:
   - netmeta: Network meta-analysis
   - multiarmvars: Arm variance decomposition (github.com/tpapak/multiarmvars)
   - igraph: Graph structures
-
-Verifier R scripts are bundled alongside this package (under verifiers/).
 """
 
 import json
@@ -32,20 +32,39 @@ def _find_r_executable() -> str:
 
 
 def _verifiers_dir() -> Path:
-    """Return the path to the bundled verifier R scripts."""
-    # When installed as a package the verifiers/ dir is at repo root,
-    # two levels above this file: src/netmeta_verify/ -> src/ -> repo root
+    """Return the path to the verifier R scripts.
+
+    Resolution order:
+    1. $VERIFIERS_DIR env var (explicit override)
+    2. ../mcp/verifier  — sibling repo on the same machine (dev + server)
+    3. /opt/mcp/verifier — Docker image path (set by Dockerfile.verify)
+    4. <package>/verifiers — wheel-bundled fallback
+    """
+    # Explicit override
+    env_dir = os.environ.get("VERIFIERS_DIR")
+    if env_dir:
+        p = Path(env_dir)
+        if p.is_dir():
+            return p
+        raise RuntimeError(f"VERIFIERS_DIR={env_dir} does not exist")
+
     here = Path(__file__).parent
+    # repo root is two levels up: src/netmeta_verify/ -> src/ -> repo root
+    repo_root = here.parent.parent
     candidates = [
-        here.parent.parent / "verifiers",  # dev / editable install
+        repo_root.parent / "mcp" / "verifier",  # ../mcp/verifier (sibling repo)
+        Path("/opt/mcp/verifier"),  # Docker copy path
         here / "verifiers",  # wheel-bundled copy
     ]
     for p in candidates:
-        if p.is_dir():
+        if p.is_dir() and any(p.iterdir()):
             return p
     raise RuntimeError(
-        "Cannot locate verifiers/ directory. "
-        "Expected at repo root or inside the package."
+        "Cannot locate verifier R scripts. Expected at:\n"
+        f"  {repo_root.parent / 'mcp' / 'verifier'}  (sibling repo)\n"
+        "  /opt/mcp/verifier  (Docker)\n"
+        "Clone https://github.com/tpapak/mcp next to mcp-netmeta, "
+        "or set the VERIFIERS_DIR environment variable."
     )
 
 
