@@ -42,13 +42,16 @@ services:
     container_name: netmeta-verify-mcp
     ports:
       - "127.0.0.1:8001:8001"
+    volumes:
+      # Verifier R scripts from mcp-verifier, rsynced alongside this repo
+      - ${VERIFIER_SRC:-../verifier}:/opt/verifier:ro
     environment:
       - R_HOME=/usr/lib/R
       - PYTHONUNBUFFERED=1
       # ROOT_PATH is empty — nginx rewrites /mcp/netmeta-verify → /mcp internally
       - ROOT_PATH=
       - PORT=8001
-      - VERIFIERS_DIR=/opt/mcp/verifier
+      - VERIFIERS_DIR=/opt/verifier
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8001/mcp"]
