@@ -2,8 +2,8 @@
 R Bridge for NetMeta Verifiers
 
 Provides Python interface to the verifier R scripts using subprocess.
-The verifier scripts live in the separate mcp/verifier repository
-(https://github.com/tpapak/mcp) at ../mcp/verifier relative to this repo.
+The verifier scripts live in mcp/verifier/ — a sibling directory inside
+the parent mcp repo (or a submodule thereof).
 The verifier scripts use:
   - netmeta: Network meta-analysis
   - multiarmvars: Arm variance decomposition (github.com/tpapak/multiarmvars)
@@ -36,8 +36,8 @@ def _verifiers_dir() -> Path:
 
     Resolution order:
     1. $VERIFIERS_DIR env var (explicit override)
-    2. ../mcp/verifier  — sibling repo on the same machine (dev + server)
-    3. /opt/mcp/verifier — Docker image path (set by Dockerfile.verify)
+    2. ../verifier  — sibling submodule inside the parent mcp repo
+    3. /opt/mcp/verifier — Docker image path
     4. <package>/verifiers — wheel-bundled fallback
     """
     # Explicit override
@@ -49,11 +49,11 @@ def _verifiers_dir() -> Path:
         raise RuntimeError(f"VERIFIERS_DIR={env_dir} does not exist")
 
     here = Path(__file__).parent
-    # repo root is two levels up: src/netmeta_verify/ -> src/ -> repo root
+    # repo root: src/netmeta_verify/ -> src/ -> mcp/netmeta/
     repo_root = here.parent.parent
     candidates = [
-        repo_root.parent / "mcp" / "verifier",  # ../mcp/verifier (sibling repo)
-        Path("/opt/mcp/verifier"),  # Docker copy path
+        repo_root.parent / "verifier",  # ../verifier  (sibling in mcp/)
+        Path("/opt/mcp/verifier"),  # Docker path
         here / "verifiers",  # wheel-bundled copy
     ]
     for p in candidates:
@@ -61,9 +61,9 @@ def _verifiers_dir() -> Path:
             return p
     raise RuntimeError(
         "Cannot locate verifier R scripts. Expected at:\n"
-        f"  {repo_root.parent / 'mcp' / 'verifier'}  (sibling repo)\n"
+        f"  {repo_root.parent / 'verifier'}  (sibling submodule in mcp/)\n"
         "  /opt/mcp/verifier  (Docker)\n"
-        "Clone https://github.com/tpapak/mcp next to mcp-netmeta, "
+        "Run: git submodule update --init --recursive\n"
         "or set the VERIFIERS_DIR environment variable."
     )
 
