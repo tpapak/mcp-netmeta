@@ -32,7 +32,7 @@ services:
 
   # ------------------------------------------------------------------
   # Verify server — verifies NMA results and generates R code
-  # Endpoint: https://biostatistics.med.auth.gr/mcp/netmeta-verify
+  # Endpoint: https://biostatistics.med.auth.gr/mcp/verify
   # ------------------------------------------------------------------
   verify-mcp:
     build:
@@ -48,7 +48,7 @@ services:
     environment:
       - R_HOME=/usr/lib/R
       - PYTHONUNBUFFERED=1
-      # ROOT_PATH is empty — nginx rewrites /mcp/netmeta-verify → /mcp internally
+      # ROOT_PATH is empty — nginx rewrites /mcp/verify → /mcp internally
       - ROOT_PATH=
       - PORT=8001
       - VERIFIERS_DIR=/opt/verifier

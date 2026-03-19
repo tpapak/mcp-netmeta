@@ -3,11 +3,11 @@ NetMeta Verify MCP HTTP Server
 
 Run the verifier MCP server with Streamable HTTP transport for web deployment.
 
-When deployed behind a reverse proxy at /mcp/netmeta-verify, set
-ROOT_PATH=/mcp/netmeta-verify so the server generates correct URLs.
+When deployed behind a reverse proxy at /mcp/verify, set
+ROOT_PATH=/mcp/verify so the server generates correct URLs.
 
 Example nginx config:
-    location /mcp/netmeta-verify/ {
+    location /mcp/verify/ {
         proxy_pass http://localhost:8001/;
     }
 """
